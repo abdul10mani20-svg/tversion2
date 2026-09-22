@@ -251,7 +251,7 @@
     });
   }
 
-  const KEY_RE = /^TRIVIS-[A-Z0-9]{4}-[A-Z0-9]{4}$/i;
+  const KEY_RE = /^LXC-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}$/i;
 
   /* ═══════════════════════════════════════════════════════
      LANGUAGE
@@ -426,7 +426,7 @@
     if (!input) return;
     const raw = String(input.value || "").trim().toUpperCase().replace(/[^A-Z0-9-]/g, "");
     if (!KEY_RE.test(raw)) {
-      showLoginError("Invalid key format. Expected: TRIVIS-XXXX-XXXX");
+      showLoginError("Invalid key format. Expected: LXC-XXXXX-XXXXX-XXXXX-XXXXX");
       return;
     }
     setActivatingState(true);
@@ -495,14 +495,16 @@
       keyInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") handleActivate();
       });
-      // Auto-uppercase + format as TRIVIS-XXXX-XXXX
+      // Auto-uppercase + format as LXC-XXXXX-XXXXX-XXXXX-XXXXX
       keyInput.addEventListener("input", () => {
         let v = String(keyInput.value || "").toUpperCase().replace(/[^A-Z0-9-]/g, "");
         // Auto-insert dashes at correct positions
         const parts = v.replace(/-/g, "");
-        if (parts.length <= 6)       v = parts.slice(0, 6);
-        else if (parts.length <= 10) v = parts.slice(0, 6) + "-" + parts.slice(6, 10);
-        else                          v = parts.slice(0, 6) + "-" + parts.slice(6, 10) + "-" + parts.slice(10, 14);
+        if (parts.length <= 3)       v = parts.slice(0, 3);
+        else if (parts.length <= 8)  v = parts.slice(0, 3) + "-" + parts.slice(3, 8);
+        else if (parts.length <= 13) v = parts.slice(0, 3) + "-" + parts.slice(3, 8) + "-" + parts.slice(8, 13);
+        else if (parts.length <= 18) v = parts.slice(0, 3) + "-" + parts.slice(3, 8) + "-" + parts.slice(8, 13) + "-" + parts.slice(13, 18);
+        else                          v = parts.slice(0, 3) + "-" + parts.slice(3, 8) + "-" + parts.slice(8, 13) + "-" + parts.slice(13, 18) + "-" + parts.slice(18, 23);
         if (keyInput.value !== v) keyInput.value = v;
         clearLoginError();
       });

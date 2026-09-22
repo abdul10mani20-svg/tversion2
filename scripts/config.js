@@ -16,6 +16,7 @@
 const TRIVIS_CONFIG = {
   LOCAL_API_BASE: "http://localhost:3000",
   PROD_API_BASE: "https://trivis-admin-panel.vercel.app",
+  LICENSE_API_BASE: "https://happy-little101.lovable.app",
 
   /* Override via chrome.storage.local { trivis_api_mode: "local" | "prod" }
      Defaults to PROD unless developer switches to local. */
@@ -27,8 +28,8 @@ const TRIVIS_CONFIG = {
 
   /* ── API Endpoint Paths ── */
   ENDPOINTS: {
-    VALIDATE_LICENSE:        "/api/public/validate-license",
-    VALIDATE_LICENSE_ALT:    "/api/validate-license",
+    VALIDATE_LICENSE:        "/api/public/v1/licenses",
+    VALIDATE_LICENSE_ALT:    "/api/public/v1/licenses",
     TELEMETRY:               "/api/public/ext/telemetry",
     EXTENSION_VERSION_PATH:  "/api/public/extension/version",
     EXTENSION_VALIDATE:      "/api/public/extension/validate",
@@ -88,7 +89,7 @@ const TRIVIS_CONFIG = {
   },
 
   /* ── License Key Format ── */
-  KEY_REGEX: /^TRIVIS-[A-Z0-9]{4}-[A-Z0-9]{4}$/i,
+  KEY_REGEX: /^LXC-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}$/i,
 };
 
 // Resolve the active API base (resolved once from storage in background context,

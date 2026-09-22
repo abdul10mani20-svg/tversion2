@@ -14,24 +14,21 @@ const TrivisAPI = {
      ───────────────────────────────────────────────────────────── */
 
   async validateLicense({ key, deviceId, name, workspace, version, recheck }) {
-    const base = await resolveApiBaseAsync();
+    const base = TRIVIS_CONFIG.LICENSE_API_BASE;
     const url  = base + TRIVIS_CONFIG.ENDPOINTS.VALIDATE_LICENSE;
 
     const body = {
-      key:       String(key || "").trim().toUpperCase(),
-      deviceId:  deviceId || await getHwid(),
-      name:      String(name || "Trivis User").slice(0, 64),
-      version:   version || TRIVIS_CONFIG.EXTENSION_VERSION,
+      operation: recheck ? "check" : "activate",
+      licenseKey: String(key || "").trim().toUpperCase(),
+      productIdentifier: "browser-extension-core",
+      deviceIdentifier: deviceId || await getHwid(),
     };
-    if (workspace) body.workspace = String(workspace).slice(0, 100);
-    if (recheck)   body.recheck   = true;
-
     return this._post(url, body);
   },
 
   /* Fallback alias route */
   async validateLicenseFallback(payload) {
-    const base = await resolveApiBaseAsync();
+    const base = TRIVIS_CONFIG.LICENSE_API_BASE;
     const url  = base + TRIVIS_CONFIG.ENDPOINTS.VALIDATE_LICENSE_ALT;
     return this._post(url, payload);
   },
