@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRIVIS DEV // NEURAL ACCELERATOR</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <div id="sp-app-root">
+      <!-- Top Cyber Terminal Header (always visible) -->
+      <header class="sp-header">
+        <div class="sp-brand">
+          <div class="sp-avatar-frame">
+            <img class="sp-brand-logo" src="assets/icon48.png" alt="TRIVIS DEV" />
+          </div>
+          <div class="sp-brand-info">
+            <span class="sp-brand-title">TRIVIS DEV</span>
+            <span class="sp-brand-sub" id="sp-brand-sub">QUANTUM ACCELERATOR</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="sp-status-badge">
+            <span class="sp-status-dot" id="sp-status-dot"></span>
+            <span id="sp-online-tag">ONLINE</span>
+          </div>
+          <select id="sp-lang-select" class="sp-lang-select" title="Extension Language">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="es">Español</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+            <option value="id">Indonesia</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="ko">한국어</option>
+          </select>
+        </div>
+      </header>
+
+      <!-- ══════════════════════════════════════════════
+           STATE: LOGIN — Enter license key
+           ══════════════════════════════════════════════ -->
+      <div id="trivis-state-login" class="trivis-state" style="display:none;">
+        <main class="sp-body">
+          <div class="cyber-card login-card">
+            <div class="cyber-card-header">
+              <div class="cyber-card-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.25 10.75C14.25 8.68 12.57 7 10.5 7C8.43 7 6.75 8.68 6.75 10.75C6.75 12.82 8.43 14.5 10.5 14.5C12.57 14.5 14.25 12.82 14.25 10.75Z"/><path d="M13.25 13.5L20.5 20.75M17.5 17.75L19 19.25M15.5 15.75L17 17.25"/></svg>
+                <span>LICENSE ACTIVATION</span>
+              </div>
+              <span class="cyber-tag">v3.2.0</span>
+            </div>
+            <div class="login-body">
+              <p class="login-desc" id="sp-login-desc">Enter your Trivis license key to activate quantum acceleration.</p>
+              <div class="login-field-wrap">
+                <input
+                  id="trivis-key-input"
+                  type="text"
+                  class="trivis-key-input"
+                  placeholder="TRIVIS-XXXX-XXXX"
+                  autocomplete="off"
+                  spellcheck="false"
+                  maxlength="14"
+                />
+              </div>
+              <button id="trivis-activate-btn" class="cyber-primary-btn login-btn" type="button">
+                <span id="trivis-activate-label">ACTIVATE LICENSE</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.43 5.93L20.5 12L14.43 18.07"/><path d="M3.5 12H20.33"/></svg>
+              </button>
+              <div id="trivis-login-error" class="trivis-error-msg" style="display:none;"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           STATE: ACTIVE DASHBOARD — licensed & running
+           ══════════════════════════════════════════════ -->
+      <div id="trivis-state-dashboard" class="trivis-state" style="display:none;">
+        <main class="sp-body">
+          <!-- Live Matrix Telemetry Card -->
+          <div class="cyber-card">
+            <div class="cyber-card-header">
+              <div class="cyber-card-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12.5H7.5L10 4.5L14 19.5L16.5 12.5H21.5"/></svg>
+                <span id="sp-core-title">NEURAL CORE STATUS</span>
+              </div>
+              <span class="cyber-tag" id="sp-plan-tag">PRO</span>
+            </div>
+
+            <div class="telemetry-grid">
+              <div class="telemetry-box">
+                <div class="telemetry-label" id="sp-lbl-user">OPERATOR</div>
+                <div class="telemetry-val accent" id="sp-val-user">—</div>
+              </div>
+              <div class="telemetry-box">
+                <div class="telemetry-label" id="sp-lbl-prompts">TOTAL PROMPTS</div>
+                <div class="telemetry-val success" id="sp-val-prompts">0</div>
+              </div>
+              <div class="telemetry-box">
+                <div class="telemetry-label" id="sp-lbl-platform">TARGET</div>
+                <div class="telemetry-val">LOVABLE.DEV</div>
+              </div>
+              <div class="telemetry-box">
+                <div class="telemetry-label" id="sp-lbl-expires">EXPIRES</div>
+                <div class="telemetry-val" id="sp-val-expires">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Launch Button -->
+          <a href="https://lovable.dev" target="_blank" rel="noopener noreferrer" class="cyber-primary-btn" id="trivis-launch-btn">
+            <span id="sp-launch-txt">INITIALIZE LOVABLE MATRIX</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.43 5.93L20.5 12L14.43 18.07"/><path d="M3.5 12H20.33"/></svg>
+          </a>
+
+          <!-- Directive Features -->
+          <div class="directive-list">
+            <div class="directive-item">
+              <div class="directive-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3H3V10H10V3Z"/><path d="M21 3H14V10H21V3Z"/><path d="M21 14H14V21H21V14Z"/><path d="M10 14H3V21H10V14Z"/></svg>
+              </div>
+              <div class="directive-content">
+                <h4 id="sp-dir-dock-title">FLOATING HUD DOCK</h4>
+                <p id="sp-dir-dock-desc">On lovable.dev, a sleek obsidian dock appears at the bottom. Drag anywhere on screen.</p>
+              </div>
+            </div>
+            <div class="directive-item">
+              <div class="directive-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.25 10.75C14.25 8.68 12.57 7 10.5 7C8.43 7 6.75 8.68 6.75 10.75C6.75 12.82 8.43 14.5 10.5 14.5C12.57 14.5 14.25 12.82 14.25 10.75Z"/><path d="M13.25 13.5L20.5 20.75"/></svg>
+              </div>
+              <div class="directive-content">
+                <h4 id="sp-dir-task-title">NEURAL TASK PIPELINE</h4>
+                <p id="sp-dir-task-desc">Send prompts via auto-generated encrypted task files with instant execution.</p>
+              </div>
+            </div>
+            <div class="directive-item">
+              <div class="directive-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8L3 12L7 16"/><path d="M17 8L21 12L17 16"/><path d="M14 4L10 20"/></svg>
+              </div>
+              <div class="directive-content">
+                <h4 id="sp-dir-dev-title">DEV MODES &amp; EXPORT</h4>
+                <p id="sp-dir-dev-desc">Switch between Plan and Build modes, or download full source with a single click.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logout -->
+          <button id="trivis-logout-btn" class="trivis-logout-btn" type="button">SIGN OUT</button>
+        </main>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           STATE: LOCKED — admin locked this device
+           ══════════════════════════════════════════════ -->
+      <div id="trivis-state-locked" class="trivis-state" style="display:none;">
+        <main class="sp-body">
+          <div class="cyber-card state-card state-locked">
+            <div class="state-icon-wrap">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff334f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            </div>
+            <h2 class="state-title">DEVICE LOCKED</h2>
+            <p class="state-msg" id="trivis-lock-msg">Your device has been locked by the administrator.</p>
+            <p class="state-hint">Contact Trivis support for assistance.</p>
+          </div>
+        </main>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           STATE: BANNED — license revoked / banned
+           ══════════════════════════════════════════════ -->
+      <div id="trivis-state-banned" class="trivis-state" style="display:none;">
+        <main class="sp-body">
+          <div class="cyber-card state-card state-banned">
+            <div class="state-icon-wrap">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff334f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg>
+            </div>
+            <h2 class="state-title">ACCESS REVOKED</h2>
+            <p class="state-msg" id="trivis-ban-msg">Your license has been revoked. Please contact support.</p>
+            <button id="trivis-ban-clear-btn" class="cyber-primary-btn state-btn" type="button">CLEAR &amp; RE-ENTER KEY</button>
+          </div>
+        </main>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           STATE: UPDATE REQUIRED
+           ══════════════════════════════════════════════ -->
+      <div id="trivis-state-update" class="trivis-state" style="display:none;">
+        <main class="sp-body">
+          <div class="cyber-card state-card state-update">
+            <div class="state-icon-wrap">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17h16M4 21h16"/></svg>
+            </div>
+            <h2 class="state-title">UPDATE AVAILABLE</h2>
+            <p class="state-msg" id="trivis-update-msg">A new version of Trivis is available. Update to continue.</p>
+            <p class="state-version" id="trivis-update-version"></p>
+            <a id="trivis-update-link" class="cyber-primary-btn state-btn" href="#" target="_blank" rel="noopener noreferrer">DOWNLOAD UPDATE</a>
+          </div>
+        </main>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           STATE: LOADING SPINNER (initial check)
+           ══════════════════════════════════════════════ -->
+      <div id="trivis-state-loading" class="trivis-state trivis-loading-state">
+        <div class="trivis-spinner"></div>
+        <span class="trivis-loading-label">SYNCING WITH NEURAL CORE...</span>
+      </div>
+
+      <!-- Cyber Terminal Footer (always visible) -->
+      <footer class="sp-footer">
+        <div class="sp-footer-meta">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff334f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>TRIVIS // AES-256</span>
+        </div>
+        <span class="sp-footer-badge">CYBER EDITION</span>
+      </footer>
+    </div>
+    <script src="scripts/popup.js"></script>
+  </body>
+</html>
